@@ -9,8 +9,8 @@ export const GifExpertApp = () => {
 
   const [categories, setCategories] = useState([ 'One Punch', 'Dragon Ball' ]);
 
-  const onAddCategory = () => {
-    setCategories([ 'Valorant', ...categories ]);
+  const onAddCategory = ( newCategory ) => {
+    setCategories([ newCategory, ...categories ]);
     // setCategories( cat => [ ...cat, 'Valorant' ]);
   }
 
@@ -21,7 +21,8 @@ export const GifExpertApp = () => {
 
       {/* Input */}
       <AddCategory
-        setCategories={ setCategories }
+        // setCategories={ setCategories } // Se envía la función del state al componente hijo para que realize la lógica.
+        onNewCategory={ value => onAddCategory( value ) } // Se envía la función al componente hijo para que este responda con el valor que necesita la función del componente padre para realizar la adición de la categoría.
       />
 
       {/* Listado de Gif */}
