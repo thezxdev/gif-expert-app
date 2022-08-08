@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-export const AddCategory = () => {
+export const AddCategory = ({ setCategories }) => {
 
   // Mantener el estado del input
-  const [inputValue, setInputValue] = useState('One punch')
+  const [inputValue, setInputValue] = useState('')
 
   // Manejar cuando el input cambia y agregar el nuevo valor
   const onInputChange = ( { target } ) => {
@@ -13,11 +13,14 @@ export const AddCategory = () => {
   // Manejar el evento submit del formulario
   const onSubmit = ( e ) => {
     e.preventDefault();
-    console.log( inputValue );
+    if( inputValue.trim().length <= 1 ) return;
+    
+    setCategories( categories => [ inputValue, ...categories ]);
+    setInputValue('');
   }
 
   return (
-    <form onSubmit={ onSubmit}>
+    <form onSubmit={ onSubmit }>
       <input
         type="text"
         placeholder="Buscar gifs"
