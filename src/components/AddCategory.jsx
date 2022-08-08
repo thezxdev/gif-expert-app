@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-export const AddCategory = ({ setCategories }) => {
+export const AddCategory = ({ onNewCategory }) => {
 
   // Mantener el estado del input
-  const [inputValue, setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState('');
 
   // Manejar cuando el input cambia y agregar el nuevo valor
   const onInputChange = ( { target } ) => {
@@ -15,7 +15,8 @@ export const AddCategory = ({ setCategories }) => {
     e.preventDefault();
     if( inputValue.trim().length <= 1 ) return;
     
-    setCategories( categories => [ inputValue, ...categories ]);
+    // setCategories( categories => [ inputValue, ...categories ]); // Se ingresa el nuevo valor desde el componente hijo.
+    onNewCategory( inputValue.trim() ); // Se le manda el valor del input al componente padre para que lo agrege el componente padre.
     setInputValue('');
   }
 
